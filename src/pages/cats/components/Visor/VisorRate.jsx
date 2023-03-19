@@ -25,7 +25,7 @@ const VisorRate = ({
   } = useVisorRate();
 
   return (
-    <div className={styles.view__container}>
+    <div className={styles.visor__container}>
       <Card
         data={{
           title,
