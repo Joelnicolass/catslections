@@ -1,0 +1,8 @@
+.star__image {
+  transform: scale(1);
+  transition: transform 0.2s;
+}
+
+.star__image:hover {
+  transform: scale(1.2);
+}
