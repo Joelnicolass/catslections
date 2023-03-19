@@ -21,3 +21,8 @@ button:focus {
 button::-moz-focus-inner {
   color: #fff;
 }
+
+.visor__animation_container {
+  position: absolute;
+  z-index: 1;
+}

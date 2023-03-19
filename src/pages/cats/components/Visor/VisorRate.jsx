@@ -25,48 +25,51 @@ const VisorRate = ({
   } = useVisorRate();
 
   return (
-    <div className={styles.visor__container}>
-      <Card
-        data={{
-          title,
-          backgroundImage,
-        }}
-        showSkeleton={loading}
-        customSkeletonComponent={
-          <Player src={LOADING_ANIMATION} autoplay loop />
-        }
-        visibilityControl={getVisibilityControl()}
-        onClick={toggleVisibleVotation}
-      >
-        <Card.Header />
-        <Card.Body>
-          {isPlayAnimation && (
-            <Player
-              src={RATED_ANIMATION}
-              autoplay
-              onEvent={handleCompleteAnimation}
-            />
-          )}
-        </Card.Body>
-        <Card.Footer>
-          <Rate
-            resetCondition={loading}
-            onClick={(rate) => {
-              startAnimation();
-              onClickRate(id, rate);
-            }}
+    <>
+      <div className={styles.visor__animation_container}>
+        {isPlayAnimation && (
+          <Player
+            src={RATED_ANIMATION}
+            autoplay
+            onEvent={handleCompleteAnimation}
           />
-          <button
-            onClick={() => {
-              handleNext(onClick);
-            }}
-            disabled={disabled}
-          >
-            {text}
-          </button>
-        </Card.Footer>
-      </Card>
-    </div>
+        )}
+      </div>
+      <div className={styles.visor__container}>
+        <Card
+          data={{
+            title,
+            backgroundImage,
+          }}
+          showSkeleton={loading}
+          customSkeletonComponent={
+            <Player src={LOADING_ANIMATION} autoplay loop />
+          }
+          visibilityControl={getVisibilityControl()}
+          onClick={toggleVisibleVotation}
+        >
+          <Card.Header />
+          <Card.Body></Card.Body>
+          <Card.Footer>
+            <Rate
+              resetCondition={loading}
+              onClick={(rate) => {
+                startAnimation();
+                onClickRate(id, rate);
+              }}
+            />
+            <button
+              onClick={() => {
+                handleNext(onClick);
+              }}
+              disabled={disabled}
+            >
+              {text}
+            </button>
+          </Card.Footer>
+        </Card>
+      </div>
+    </>
   );
 };
 
