@@ -31,10 +31,15 @@ const CatView = () => {
     service: getRandomCat,
   });
 
-  const [rated, setRated] = useState(false);
+  const [playAnimation, setPlayAnimation] = useState(false);
   const [name, setName] = useState(getRandomElement(NAMES.all));
+  const [visibleVotation, setVisibleVotation] = useState(false);
 
-  const handleNext = () => {
+  const toggleVisibleVotation = () => {
+    setVisibleVotation(!visibleVotation);
+  };
+
+  const handleNext = (e) => {
     setName(getRandomElement(NAMES.all));
     refresh();
   };
@@ -42,34 +47,36 @@ const CatView = () => {
   return (
     <div className={styles.view__container}>
       <Card
-        background={cat}
+        data={{
+          title: name,
+          backgroundImage: cat,
+        }}
         showSkeleton={loading}
         customSkeletonComponent={
           <Player src={LOADING_ANIMATION} autoplay loop />
         }
+        visibilityControl={visibleVotation}
+        onClick={toggleVisibleVotation}
       >
-        <Card.Header>
-          <h2>{name}</h2>
-        </Card.Header>
+        <Card.Header />
         <Card.Body>
-          {rated && (
+          {playAnimation && (
             <Player
-              style={{ width: "60%", height: "60%" }}
               src={RATED_ANIMATION}
               autoplay
               onEvent={(e) => {
                 if (e === PLAYER_EVENTS.COMPLETE) {
-                  setRated(false);
+                  setPlayAnimation(false);
                 }
               }}
             />
           )}
         </Card.Body>
-        <Card.Footer large>
+        <Card.Footer>
           <Rate
             resetCondition={loading}
             onClick={(rate) => {
-              setRated(true);
+              setPlayAnimation(true);
             }}
           />
           <button onClick={handleNext}>NEXT</button>

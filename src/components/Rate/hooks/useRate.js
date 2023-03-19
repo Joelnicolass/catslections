@@ -28,7 +28,8 @@ const useRate = ({ maxRate, onClick, resetCondition = false }) => {
     setStarsHover(draft);
   };
 
-  const handleRate = (index) => {
+  const handleRate = (e, index) => {
+    e.stopPropagation();
     setRate(index + 1);
     if (onClick) onClick(index + 1);
   };

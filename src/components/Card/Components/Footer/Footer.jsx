@@ -1,14 +1,17 @@
 import React from "react";
 
 import styles from "./Footer.module.css";
+import { useCardContext } from "../../Card";
 
-const Footer = ({ children, large = false, ...props }) => {
+const Footer = ({ children, ...props }) => {
+  const { isHover } = useCardContext();
+
   return (
     <div
       className={
-        large
-          ? styles.card__footer_container_large
-          : styles.card__footer_container
+        !isHover
+          ? styles.card__footer_container
+          : styles.card__footer_container__hover
       }
       {...props}
     >

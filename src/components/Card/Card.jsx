@@ -1,40 +1,74 @@
-import React from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import styles from "./Card.module.css";
 import Header from "./Components/Header/Header";
 import Body from "./Components/Body/Body";
 import Footer from "./Components/Footer/Footer";
 
+export const CardContext = createContext({});
+export const { Provider: ProviderCard } = CardContext;
+export const useCardContext = () => useContext(CardContext);
+
 const Card = ({
-  background,
+  data: { title, backgroundImage },
   showSkeleton,
   children,
   customSkeletonComponent,
+  visibilityControl = null,
+  onClick = () => {},
   ...props
 }) => {
   const styleBackgroundImg = {
-    backgroundImage: `url(${background})`,
+    backgroundImage: `url(${backgroundImage})`,
     backgroundSize: "cover",
     backgroundPosition: "center",
   };
 
-  if (showSkeleton) {
-    return (
-      <div className={styles.card__container}>
-        <div className={styles.card__skeleton}>
-          {customSkeletonComponent && customSkeletonComponent}
-        </div>
-      </div>
-    );
-  }
+  const [isHover, setIsHover] = useState(visibilityControl || false);
+
+  const existVisibilityControl = visibilityControl !== null;
+
+  const handleMouseEnter = () => {
+    if (existVisibilityControl) return;
+    setIsHover(true);
+  };
+
+  const handleMouseLeave = () => {
+    if (existVisibilityControl) return;
+    setIsHover(false);
+  };
+
+  useEffect(() => {
+    if (existVisibilityControl) {
+      setIsHover(visibilityControl);
+    }
+  }, [visibilityControl]);
 
   return (
-    <div
-      className={`${styles.card__container} ${styles.card__image}`}
-      style={styleBackgroundImg}
-      {...props}
+    <ProviderCard
+      value={{
+        title,
+        isHover,
+      }}
     >
-      {children}
-    </div>
+      {showSkeleton ? (
+        <div className={styles.card__container}>
+          <div className={styles.card__skeleton}>
+            {customSkeletonComponent && customSkeletonComponent}
+          </div>
+        </div>
+      ) : (
+        <div
+          className={`${styles.card__container} ${styles.card__image}`}
+          style={styleBackgroundImg}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          onClick={onClick}
+          {...props}
+        >
+          {children}
+        </div>
+      )}
+    </ProviderCard>
   );
 };
 

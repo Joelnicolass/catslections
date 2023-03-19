@@ -26,7 +26,7 @@ const Rate = ({
             key={`${id}-${index}`}
             filled={starsHover.get(index) || index < rate ? true : false}
             index={index}
-            onClick={() => handleRate(index)}
+            onClick={(e) => handleRate(e, index)}
             onMouseEnter={() => handleMouseEnter(index)}
             onMouseLeave={() => handleMouseLeave(index)}
           />
