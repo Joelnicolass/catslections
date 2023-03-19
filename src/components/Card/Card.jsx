@@ -7,7 +7,7 @@ import useCardHover from "./hooks/useCardHover";
 import { ProviderCard } from "./context/CardContext";
 
 const Card = ({
-  data: { title, backgroundImage },
+  data: { title, backgroundImage } = {},
   showSkeleton,
   children,
   customSkeletonComponent,

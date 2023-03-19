@@ -7,23 +7,15 @@ import LOADING_ANIMATION from "../../../../assets/lottie/loading-cat.json";
 import RATED_ANIMATION from "../../../../assets/lottie/star.json";
 import styles from "./VisorRate.module.css";
 
-import { useFetch } from "../../../../hooks/useFetch";
-import { getRandomCat } from "../../services/cat.service";
 import { Player } from "@lottiefiles/react-lottie-player";
 import useVisorRate from "./hooks/useVisorRate";
 
-const VisorRate = () => {
+const VisorRate = ({
+  card: { id = "", title = "", backgroundImage = "", loading = false },
+  button: { onClick = () => {}, text = "NEXT", disabled = false },
+  rate: { onClickRate = (id, rate) => {} } = {},
+}) => {
   const {
-    data: cat,
-    error,
-    loading,
-    refresh,
-  } = useFetch({
-    service: getRandomCat,
-  });
-
-  const {
-    name,
     isPlayAnimation,
     getVisibilityControl,
     handleCompleteAnimation,
@@ -36,8 +28,8 @@ const VisorRate = () => {
     <div className={styles.view__container}>
       <Card
         data={{
-          title: name,
-          backgroundImage: cat,
+          title,
+          backgroundImage,
         }}
         showSkeleton={loading}
         customSkeletonComponent={
@@ -61,14 +53,16 @@ const VisorRate = () => {
             resetCondition={loading}
             onClick={(rate) => {
               startAnimation();
+              onClickRate(id, rate);
             }}
           />
           <button
             onClick={() => {
-              handleNext(refresh);
+              handleNext(onClick);
             }}
+            disabled={disabled}
           >
-            NEXT
+            {text}
           </button>
         </Card.Footer>
       </Card>

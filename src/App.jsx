@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
-import CatView from "./pages/cats/views/CatView";
+import React from "react";
+import RateRandomCatView from "./pages/cats/views/RateRandomCatView";
 
 const App = () => {
   return (
     <div>
-      <CatView />
+      <RateRandomCatView />
     </div>
   );
 };
