@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build --base=./",
     "preview": "vite preview",
-    "start": "vite"
+    "start": "vite --omit=dev"
   },
   "dependencies": {
     "@lottiefiles/react-lottie-player": "^3.5.2",
