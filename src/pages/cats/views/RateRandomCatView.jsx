@@ -20,7 +20,6 @@ const RateRandomCatView = () => {
   });
 
   const [name, setName] = useState(getRandomElement(NAMES.all));
-
   const sendToServer = (id, rate) => {};
 
   return (

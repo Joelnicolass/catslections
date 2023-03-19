@@ -15,7 +15,7 @@ const Header = ({ children, ...props }) => {
       }
       {...props}
     >
-      {title && <h2>{title}</h2>}
+      {title && <h2 className={styles.card__header_title}>{title}</h2>}
       {children}
     </div>
   );

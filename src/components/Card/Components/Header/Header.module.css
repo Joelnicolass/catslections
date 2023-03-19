@@ -23,3 +23,18 @@
   transition: background 0.3s ease, transform 0.8s ease;
   background: rgba(0, 0, 0, 0.7);
 }
+
+.card__header_title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+@media (max-width: 768px) {
+  .card__header_title {
+    font-size: 80%;
+  }
+}
