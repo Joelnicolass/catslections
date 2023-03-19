@@ -1,7 +1,7 @@
 import React from "react";
 
 import styles from "./Header.module.css";
-import { useCardContext } from "../../Card";
+import { useCardContext } from "../../context/CardContext";
 
 const Header = ({ children, ...props }) => {
   const { title, isHover } = useCardContext();

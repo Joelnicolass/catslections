@@ -11,6 +11,7 @@ import RATED_ANIMATION from "../../../assets/lottie/star.json";
 
 import { Player } from "@lottiefiles/react-lottie-player";
 import Card from "../../../components/Card/Card";
+import { isMobile } from "../../../utils/device";
 
 const getRandomElement = (arr) => {
   const randomIndex = Math.floor(Math.random() * arr.length);
@@ -35,6 +36,8 @@ const CatView = () => {
   const [name, setName] = useState(getRandomElement(NAMES.all));
   const [visibleVotation, setVisibleVotation] = useState(false);
 
+  console.log(isMobile());
+
   const toggleVisibleVotation = () => {
     setVisibleVotation(!visibleVotation);
   };
@@ -55,7 +58,7 @@ const CatView = () => {
         customSkeletonComponent={
           <Player src={LOADING_ANIMATION} autoplay loop />
         }
-        visibilityControl={visibleVotation}
+        visibilityControl={isMobile() ? visibleVotation : null}
         onClick={toggleVisibleVotation}
       >
         <Card.Header />

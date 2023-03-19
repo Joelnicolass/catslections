@@ -1,7 +1,7 @@
 import React from "react";
 
 import styles from "./Footer.module.css";
-import { useCardContext } from "../../Card";
+import { useCardContext } from "../../context/CardContext";
 
 const Footer = ({ children, ...props }) => {
   const { isHover } = useCardContext();

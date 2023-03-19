@@ -1,12 +1,10 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React from "react";
 import styles from "./Card.module.css";
 import Header from "./Components/Header/Header";
 import Body from "./Components/Body/Body";
 import Footer from "./Components/Footer/Footer";
-
-export const CardContext = createContext({});
-export const { Provider: ProviderCard } = CardContext;
-export const useCardContext = () => useContext(CardContext);
+import useCardHover from "./hooks/useCardHover";
+import { ProviderCard } from "./context/CardContext";
 
 const Card = ({
   data: { title, backgroundImage },
@@ -23,25 +21,8 @@ const Card = ({
     backgroundPosition: "center",
   };
 
-  const [isHover, setIsHover] = useState(visibilityControl || false);
-
-  const existVisibilityControl = visibilityControl !== null;
-
-  const handleMouseEnter = () => {
-    if (existVisibilityControl) return;
-    setIsHover(true);
-  };
-
-  const handleMouseLeave = () => {
-    if (existVisibilityControl) return;
-    setIsHover(false);
-  };
-
-  useEffect(() => {
-    if (existVisibilityControl) {
-      setIsHover(visibilityControl);
-    }
-  }, [visibilityControl]);
+  const { handleMouseEnter, handleMouseLeave, isHover } =
+    useCardHover(visibilityControl);
 
   return (
     <ProviderCard
