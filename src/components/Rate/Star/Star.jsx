@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./Star.module.css";
 
-import STAR_EMPTY from "../../assets/images/star-empty.png";
-import STAR_FILL from "../../assets/images/star-fill.png";
+import STAR_EMPTY from "../../../assets/images/star-empty.png";
+import STAR_FILL from "../../../assets/images/star-fill.png";
 
 const Star = ({ filled = false, ...props }) => {
   return (
